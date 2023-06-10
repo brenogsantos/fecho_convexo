@@ -5,6 +5,8 @@
 #include <sstream>
 #include <string>
 
+#include "../include/Stack.h"
+
 struct Point {
   int alfa;
   int beta;

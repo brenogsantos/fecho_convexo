@@ -5,7 +5,7 @@
 int main() {
   std::cout << "bbbb\n";
   managerInit();
-  readFile("entrada10.txt");
+  readFile("ENTRADA100.txt");
   managerFinish();
   return 0;
 }

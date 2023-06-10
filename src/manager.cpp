@@ -1,5 +1,8 @@
 #include "../include/manager.h"
 
+#include "../include/grahamScan.h"
+#include "../include/jarvisMarch.h"
+
 Point* points = nullptr;
 
 void managerInit() { points = nullptr; }
@@ -38,6 +41,9 @@ void readFile(const std::string filename) {
 
     printPoints(point_counter);
   }
+
+  grahamScan(points, point_counter);
+  // jarvisMarch(points, point_counter);
 }
 
 void managerFinish() { delete[] points; }
