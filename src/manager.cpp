@@ -1,8 +1,5 @@
 #include "../include/manager.h"
 
-#include "../include/grahamScan.h"
-#include "../include/jarvisMarch.h"
-
 Point* points = nullptr;
 
 void managerInit() { points = nullptr; }
@@ -39,20 +36,43 @@ void readFile(const std::string filename) {
     }
     file.close();
 
-    printPoints(point_counter);
+    // printPoints(point_counter);
   }
+  clock_t start = clock();
+  grahamScan(points, point_counter, MERGE_SORT, 1);
+  clock_t end = clock();
+  double timeInSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+  std::cout << "\nGRAHAM+MERGESORT: " << std::fixed << std::setprecision(3)
+            << timeInSeconds << "s\n";
 
-  grahamScan(points, point_counter);
-  // jarvisMarch(points, point_counter);
+  start = clock();
+  grahamScan(points, point_counter, INSERTION_SORT, 0);
+  end = clock();
+  timeInSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+  std::cout << "GRAHAM+INSERTIONSORT: " << std::fixed << std::setprecision(3)
+            << timeInSeconds << "s\n";
+
+  start = clock();
+  grahamScan(points, point_counter, COUNTING_SORT, 0);
+  end = clock();
+  timeInSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+  std::cout << "GRAHAM+LINEAR: " << std::fixed << std::setprecision(3)
+            << timeInSeconds << "s\n";
+
+  start = clock();
+  jarvisMarch(points, point_counter);
+  end = clock();
+  timeInSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+  std::cout << "JARVIS: " << std::fixed << std::setprecision(3) << timeInSeconds
+            << "s\n";
 }
 
 void managerFinish() { delete[] points; }
 
 void printPoints(int counter) {
-  std::cout << "aaaaaaaa\n";
   for (int i = 0; i < counter; i++) {
     std::cout << "Point " << i + 1 << ": alfa = " << points[i].alfa
-              << ", beta = " << points[i].beta << std::endl;
+              << ", beta = " << points[i].beta;
   }
 }
 

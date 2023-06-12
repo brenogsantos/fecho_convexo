@@ -1,6 +1,8 @@
 #include "../include/grahamScan.h"
 
+#include "../include/sorters.h"
 template class Stack<Point>;
+
 Point p0;
 
 Point secondTop(Stack<Point>& stk) {
@@ -35,9 +37,9 @@ int compare(const void* vp1, const void* vp2) {
 
   return (o == 2) ? -1 : 1;
 }
-void grahamScan(Point points[], int n) {
+void grahamScan(Point* points, int n, TIPO_SORT tipo_sort, int print_flag) {
   if (n < 3) {
-    std::cout << "Convex hull not possible" << std::endl;
+    std::cout << "Fecho Convexo não é possível" << std::endl;
     return;
   }
 
@@ -56,9 +58,22 @@ void grahamScan(Point points[], int n) {
   swap(points[0], points[minIdx]);
 
   p0 = points[0];
-
-  std::qsort(&points[1], n - 1, sizeof(Point), compare);
-
+  switch (tipo_sort) {
+    case MERGE_SORT:
+      mergeSort(&points[1], 0, n - 2, compare);
+      break;
+    case INSERTION_SORT:
+      insertionSort(points, n, compare);
+      break;
+    case COUNTING_SORT:
+      countingSort(points, n, compare);
+      break;
+    default:
+      break;
+  }
+  // insertionSort(points, n, compare);
+  // countingSort(points, n, compare);
+  // mergeSort(&points[1], 0, n - 2, compare);
   int arrSize = 1;  // used to locate items in modified array
   for (int i = 1; i < n; i++) {
     // when the angle of ith and (i+1)th elements are same, remove points
@@ -81,11 +96,10 @@ void grahamScan(Point points[], int n) {
   }
 
   stack.invert();
-
-  std::cout << "Convex Hull points:" << std::endl;
+  if (print_flag) std::cout << "FECHO CONVEXO:" << std::endl;
   while (!stack.isEmpty()) {
     Point p = stack.pop();
-    std::cout << "(" << p.alfa << ", " << p.beta << ")" << std::endl;
+    if (print_flag) std::cout << p.alfa << " " << p.beta << std::endl;
   }
 }
 

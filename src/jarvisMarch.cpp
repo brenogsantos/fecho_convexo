@@ -11,11 +11,11 @@ template class Stack<Point>;
 
 void jarvisMarch(Point points[], int n) {
   if (n < 3) {
-    std::cout << "Convex hull not possible" << std::endl;
+    std::cout << "Fecho Convexo não é possível";
     return;
   }
 
-  Stack<Point> hull(n);
+  Stack<Point> fecho_convexo(n);
 
   // Find the leftmost point
   int leftmostIdx = 0;
@@ -28,7 +28,7 @@ void jarvisMarch(Point points[], int n) {
   int p = leftmostIdx;
   int q;
   do {
-    hull.push(points[p]);
+    fecho_convexo.push(points[p]);
     q = (p + 1) % n;
     for (int i = 0; i < n; i++) {
       if (orientation(points[p], points[i], points[q]) == 2) {
@@ -38,10 +38,10 @@ void jarvisMarch(Point points[], int n) {
     p = q;
   } while (p != leftmostIdx);
 
-  // Print the convex hull points
-  while (!hull.isEmpty()) {
-    Point point = hull.pop();
-    std::cout << "(" << point.alfa << ", " << point.beta << ")" << std::endl;
-  }
+  // Print the convex fecho_convexo points
+  // while (!fecho_convexo.isEmpty()) {
+  // Point point = fecho_convexo.pop();
+  // std::cout << "(" << point.alfa << ", " << point.beta << ")\n";
+  //}
 }
 

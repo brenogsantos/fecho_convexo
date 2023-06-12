@@ -71,12 +71,11 @@ T Stack<T>::getTop() const {
 template <class T>
 void Stack<T>::invert() {
   if (this->isEmpty()) {
-    return;  // No need to invert an empty stack
+    return;
   }
 
   int size = top + 1;
   for (int i = 0; i < size / 2; i++) {
-    // Swap elements from top to bottom
     T temp = this->array[i];
     this->array[i] = this->array[size - i - 1];
     this->array[size - i - 1] = temp;

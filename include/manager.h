@@ -1,16 +1,23 @@
 #pragma once
 
+#include <ctime>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
 
-#include "../include/Stack.h"
+#include "Stack.h"
+
+enum TIPO_SORT { MERGE_SORT, INSERTION_SORT, COUNTING_SORT };
 
 struct Point {
   int alfa;
   int beta;
 };
+
+#include "grahamScan.h"
+#include "jarvisMarch.h"
 
 extern Point* points;
 
