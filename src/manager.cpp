@@ -12,7 +12,6 @@ void readFile(const std::string filename) {
   std::ifstream file(filename);
 
   if (file.is_open()) {
-    std::cout << "aaaa\n";
     while (std::getline(file, line)) {
       std::istringstream iss(line);
 
@@ -35,8 +34,6 @@ void readFile(const std::string filename) {
       point_counter++;
     }
     file.close();
-
-    // printPoints(point_counter);
   }
   clock_t start = clock();
   grahamScan(points, point_counter, MERGE_SORT, 1);

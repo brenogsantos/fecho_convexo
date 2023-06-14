@@ -92,7 +92,6 @@ void countingSort(Point* points, int n, CompareFunction compare) {
   delete[] count;
   delete[] output;
 
-  // Perform stable sorting of points using compare function
   for (int i = 1; i < n; i++) {
     Point key = points[i];
     int j = i - 1;

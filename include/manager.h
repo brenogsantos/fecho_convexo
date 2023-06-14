@@ -16,6 +16,11 @@ struct Point {
   int beta;
 };
 
+struct Reta {
+  Point p1;
+  Point p2;
+};
+
 #include "grahamScan.h"
 #include "jarvisMarch.h"
 
